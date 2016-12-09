@@ -12,7 +12,6 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 
 import com.sflin.pdrefreshlayout.IHeaderView;
 import com.sflin.pdrefreshlayout.R;
@@ -73,7 +72,6 @@ public class RubberView extends View implements IHeaderView {
 
     private void init(){
 
-//        setBackgroundColor(0xffe6e6e6);
         mPath = new Path();
 
         mPaint = new Paint();
@@ -116,6 +114,10 @@ public class RubberView extends View implements IHeaderView {
         height = h;
         if (height==0){
             state = 0;
+            GreatCircleR = size;
+            SmallCircleR = size;
+            GreatCircleY = size+10;
+            SmallCircleY = size+10;
         }
 
         mLoadingRectF = new RectF(width/2-DensityUtil.dp2px(getContext(),10),DensityUtil.dp2px(getContext(),25),
@@ -248,20 +250,4 @@ public class RubberView extends View implements IHeaderView {
                 height, matrix, true);
         return resizedBitmap;
     }
-
-    //添加动画
-    private void addAnimator(){
-        mAnimator = ValueAnimator.ofFloat(0,360);
-        mAnimator.setInterpolator(new LinearInterpolator());
-        mAnimator.setDuration(1000);
-        mAnimator.setRepeatCount(-1);
-        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (Float) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
-    }
-
 }
