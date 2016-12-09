@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
+
 import com.sflin.pdrefreshlayout.Footer.DefaultLoadMoreView;
 import com.sflin.pdrefreshlayout.Header.RubberView;
 import com.sflin.pdrefreshlayout.util.DensityUtil;
@@ -29,9 +30,10 @@ public class PDRefreshLayout extends FrameLayout {
     private float lastY;
     private float firstY;
 
-    //刷新状态
+    //刷新状态 1刷新状态 2加载状态 3没有添加子View状态
     private static final int REFRESH = 1;
     private static final int LOADING = 2;
+    private static final int NoVIEW = 3;
     private int state = REFRESH;
 
     // 阻尼系数
@@ -101,12 +103,50 @@ public class PDRefreshLayout extends FrameLayout {
     private void init(){
         //使用isInEditMode解决可视化编辑器无法识别自定义控件的问题
         if (isInEditMode()) return;
-        if (getChildCount() > 1) throw new RuntimeException("Only one childView s supported");
+    }
+
+    @Override
+    public void addView(View child) {
+        if (getChildCount() > 2) {
+            throw new IllegalStateException("PDRefreshLayout can host only one direct child");
+        }
+        super.addView(child);
+    }
+
+    @Override
+    public void addView(View child, int index) {
+        if (getChildCount() > 2) {
+            throw new IllegalStateException("PDRefreshLayout can host only one direct child");
+        }
+        super.addView(child, index);
+    }
+
+    @Override
+    public void addView(View child, ViewGroup.LayoutParams params) {
+        if (getChildCount() > 2) {
+            throw new IllegalStateException("PDRefreshLayout can host only one direct child");
+        }
+        super.addView(child, params);
+    }
+
+    @Override
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+        if (getChildCount() > 2) {
+            throw new IllegalStateException("PDRefreshLayout can host only one direct child");
+        }
+        super.addView(child, index, params);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+
+        if (getChildCount() == 0){
+            state = NoVIEW;
+            return;
+        }
+
+        state = REFRESH;
 
         //添加头部
         if (mHeadLayout == null) {
@@ -140,6 +180,7 @@ public class PDRefreshLayout extends FrameLayout {
                 }
             }
         }
+
         //获得子控件
         mChildView = getChildAt(0);
         if (mChildView == null) return;
@@ -193,7 +234,7 @@ public class PDRefreshLayout extends FrameLayout {
                     mHeadLayout.requestLayout();
                     mChildView.setTranslationY(moveY);
                     mHeadView.onRefreshingDown(mChildView.getTranslationY(),mHeadHeight);
-                }else {
+                }else if (state == LOADING){
                     float moveY = Math.min(0, event.getY(pointerIndex) - firstY);
                     moveY = moveY * SCROLL_RATIO;
                     mFootLayout.getLayoutParams().height = (int) -moveY;
@@ -226,7 +267,7 @@ public class PDRefreshLayout extends FrameLayout {
                             mPDRefreshListener.onRefresh();
                         }
                     }
-                }else {
+                }else if (state == LOADING){
                     if (mChildView.getTranslationY()>-mFootHeight){
                         animChildView(0f);
                     }else {
@@ -334,7 +375,7 @@ public class PDRefreshLayout extends FrameLayout {
                     mPDRefreshListener.onFinishRefresh();
                 }
                 mHeadView.onFinish(mChildView.getTranslationY(),mHeadHeight,isRefreshing);
-            }else {
+            }else if (state == LOADING){
                 if (mPDRefreshListener!=null){
                     mPDRefreshListener.onFinishLoadMore();
                 }
