@@ -1,5 +1,4 @@
 # PDRefreshLayout
-***
 
 ### PDRefreshLayout是一个支持上拉刷新，下拉加载的控件。主要特性有：
 
@@ -7,6 +6,11 @@
 2. 支持加载更多
 3. 可以自定义Header的刷新效果和Footer的加载更多效果
 4. 支持刷新和加载时的监听事件
+
+## 效果图
+![3](http://o9o9d242i.bkt.clouddn.com/3.gif)
+![2](http://o9o9d242i.bkt.clouddn.com/2.gif)
+![1](http://o9o9d242i.bkt.clouddn.com/1.gif)
 
 ## 使用方法
 1. **添加gradle依赖**
