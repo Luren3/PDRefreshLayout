@@ -8,9 +8,9 @@
 4. 支持刷新和加载时的监听事件
 
 ## 效果图
-![3](http://o9o9d242i.bkt.clouddn.com/3.gif?imageView2/1/w/300/h/600)
-![2](http://o9o9d242i.bkt.clouddn.com/2.gif?imageView2/1/w/300/h/600)
-![1](http://o9o9d242i.bkt.clouddn.com/1.gif?imageView2/1/w/300/h/600)
+![3](http://o9o9d242i.bkt.clouddn.com/3.gif)
+![2](http://o9o9d242i.bkt.clouddn.com/2.gif)
+![1](http://o9o9d242i.bkt.clouddn.com/1.gif)
 
 ## 使用方法
 1. **添加gradle依赖**
@@ -166,3 +166,6 @@
 	
 #### 其他说明
 * 控件只能有一个子View
+
+
+如果你觉得还不错，欢迎Star. 欢迎加入交流群: 114925972
