@@ -8,9 +8,9 @@
 4. 支持刷新和加载时的监听事件
 
 ## 效果图
-![3](http://o9o9d242i.bkt.clouddn.com/3.gif)
-![2](http://o9o9d242i.bkt.clouddn.com/2.gif)
-![1](http://o9o9d242i.bkt.clouddn.com/1.gif)
+![3](http://o9o9d242i.bkt.clouddn.com/3.gif?imageView2/3/w/400/h/400)
+![2](http://o9o9d242i.bkt.clouddn.com/2.gif?imageView2/3/w/400/h/400)
+![1](http://o9o9d242i.bkt.clouddn.com/1.gif?imageView2/3/w/400/h/400)
 
 ## 使用方法
 1. **添加gradle依赖**
