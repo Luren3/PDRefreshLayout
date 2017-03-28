@@ -15,7 +15,7 @@
 ## 使用方法
 1. **添加gradle依赖**
 	
-		compile 'com.sflin:pdrefreshlayout:1.0.4'
+		compile 'com.sflin:pdrefreshlayout:1.0.5'
 		
 2. **在xml中添加PDRefreshLayout**
 
@@ -93,6 +93,8 @@
 5. setHeaderView(IHeaderView headerView) 设置头部下拉刷新效果
 
 6. setBottomView(IFooterView bottomView) 设置底部上拉加载效果
+
+7. public void setIsAutoPull(boolean isAutoPull) --true 设置自动弹出下拉头刷新
 
 #### 自定义Header和Footer
 

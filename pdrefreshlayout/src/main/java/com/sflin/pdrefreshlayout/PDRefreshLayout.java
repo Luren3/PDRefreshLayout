@@ -390,6 +390,17 @@ public class PDRefreshLayout extends FrameLayout {
         }
     }
 
+    public void setIsAutoPull(boolean isAutoPull){
+        if (isAutoPull){
+            state = REFRESH;
+            isRefreshing = true;
+            mHeadLayout.getLayoutParams().height = (int) mHeadHeight;
+            mHeadLayout.requestLayout();
+            mChildView.setTranslationY(mHeadHeight);
+            mHeadView.onRefreshingDown(mChildView.getTranslationY(),mHeadHeight);
+        }
+    }
+
     //刷新监听
     public void setRefreshListener(PDRefreshListener refreshListener){
         if (mPDRefreshListener == null){
